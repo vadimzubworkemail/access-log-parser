@@ -7,7 +7,7 @@ import java.io.FileReader;
 public class LineReader {
 
     public static void main(String[] args) {
-        File file = new File("access.log");
+        File file = new File("accesslog.txt");
 
         if (!file.exists()) {
             System.out.println("File not found");
