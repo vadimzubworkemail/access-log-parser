@@ -1,5 +1,7 @@
-import main.java.ru.courses.collections.task1.LogEntry;
-import main.java.ru.courses.collections.task1.Statistics;
+
+
+import main.java.ru.courses.collections.task2.LogEntry;
+import main.java.ru.courses.collections.task2.Statistics;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -22,8 +24,8 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Operating system shares:");
-        for (Map.Entry<String, Double> entry : stats.getOsStatistics().entrySet()) {
+        System.out.println("Browser share:");
+        for (Map.Entry<String, Double> entry : stats.getBrowserStatistics().entrySet()) {
             System.out.println(entry.getKey() + ": " + String.format("%.3f", entry.getValue()));
         }
     }
