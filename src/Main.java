@@ -1,5 +1,5 @@
-import main.java.ru.courses.streamApi.task1.LogEntry;
-import main.java.ru.courses.streamApi.task1.Statistics;
+import main.java.ru.courses.streamApi.task2.LogEntry;
+import main.java.ru.courses.streamApi.task2.Statistics;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,23 +8,24 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         Statistics statistics = getStatistics();
-        System.out.println("Average number of site visits per hour: " + String.format("%2f", statistics.getAverageVisitsPerHour()));
-        System.out.println("Average number of erroneous requests per hour: " + String.format("%2f", statistics.getAverageErrorsPerHour()));
-        System.out.println("Average number of visits per user per hour: " + String.format("%2f", statistics.getAverageVisitsPerUser()));
+
+        System.out.println("Peak website traffic per second: " + statistics.getPeakVisitsPerSecond());
+        System.out.println("Maximum website traffic by one user: " + statistics.getMaxVisitsByOneUser());
+        System.out.println("List of sites with links to the current site: " + statistics.getReferers());
     }
 
     private static Statistics getStatistics() {
         Statistics statistics = new Statistics();
         try (BufferedReader br = new BufferedReader(new FileReader("accesslog.txt"))) {
             String line;
+            LogEntry entry;
             while ((line = br.readLine()) != null) {
-                LogEntry logEntry;
                 try {
-                    logEntry = new LogEntry(line);
+                    entry = new LogEntry(line);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                statistics.addEntry(logEntry);
+                statistics.addEntry(entry);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
